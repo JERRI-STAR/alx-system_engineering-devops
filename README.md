@@ -1,1 +1,1 @@
-wow, what a great start
+Just wow
