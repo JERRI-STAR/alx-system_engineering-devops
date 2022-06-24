@@ -1,2 +1,2 @@
 #!/bin/bash
-chgrp Jeremiah hello
+chgrp school hello
