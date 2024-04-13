@@ -1,0 +1,39 @@
+Project:- 0x11. What happens when you type google.com in your browser and press Enter.
+
+Title:
+Unraveling the Web: A Deep Dive into the Process Behind Typing https://www.google.com.
+
+Introduction:
+
+When you type “https://www.google.com" into your browser and press Enter, a series of complex processes occur behind the scenes to deliver the desired webpage. This blog post will provide an in-depth explanation of these processes, covering DNS requests, TCP/IP, firewalls, HTTPS/SSL, load balancers, web servers, application servers, and databases.
+
+1. DNS Request: 
+When you enter a URL into your browser, the first step is to resolve the domain name into an IP address. This process is called a DNS (Domain Name System) request. Your browser sends a DNS query to a DNS resolver, which then queries the appropriate DNS server to find the IP address associated withthe domain name “www.google.com".
+
+2. TCP/IP: 
+Once the DNS server returns the IP address, your browser establishes a connection to the server using the TCP/IP (Transmission Control Protocol/Internet Protocol) protocol suite. TCP/IP is the foundation of the internet, allowing data to be transmitted between devices.
+
+3. Firewall: 
+Before the connection is established, it must pass through any firewalls that may be in place. Firewalls act as a barrier between your device and theinternet, protecting it from malicious traffic. They can be hardware-based or software-based and can be configured to allow or block specific types of traffic.
+
+4. HTTPS/SSL: 
+Once the connection is established, it is encrypted using HTTPS (Hypertext Transfer Protocol Secure) and SSL (Secure Sockets Layer) or it successor, TLS (Transport Layer Security). This ensures that the data transmitted between your device and the server is secure and cannot be intercepted or tampered with by unauthorized parties.
+
+5. Load Balancer: 
+When the connection reaches the Google server, it may pass through a load balancer. A load balancer distributes incoming traffic across multiple servers, ensuring that no single server becomes overloaded and that the overall performance of the system remains consistent.
+
+6. Web Server: 
+After passing through the load balancer, the request reaches the web server. The web server is responsible for serving the requested webpage to the client. In the case of Google, the web server may serve a static HTML page or dynamically generate a page based on the user’s request.
+
+7. Application Server:
+ In some cases, the web server may forward the request to an application server. An application server is responsible for executing server-side code,such as Java or Python, to generate dynamic content. This allows for more complex web applications, such as those that require user authentication ordatabase access.
+
+8. Database: 
+Finally, the application server may interact with a database to retrieve or store data. Databases are essential for storing and managing large amounts of data, such as user information, product catalogs, and transaction history.
+
+Conclusion:
+Typing “https://www.google.com" into your browser and pressing Enter may seem like a simple action, but it triggers a complex series of processes that involve DNS requests, TCP/IP, firewalls, HTTPS/SSL, load balancers, web servers, application servers, and databases. Understanding these processes is crucial for anyone working in the field of software engineering, as it helps to build a solid foundation for developing and maintaining web applications.
+
+
+LINK TO MY BLOG POST ON MEDIUM IS BELOW:-
+https://medium.com/@jerristarikechukwu/unraveling-the-web-a-deep-dive-into-the-process-behind-typing-https-www-google-com-efb264e5d0cd
