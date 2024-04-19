@@ -1,17 +1,3 @@
 #!/usr/bin/env bash
 # Runs the whoami command under the user passed as argument.
-#!/bin/bash
-
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <username>"
-  exit 1
-fi
-
-user=$1
-
-if id -u "$user" >/dev/null 2>&1; then
-  su - "$user" -c 'whoami'
-else
-  echo "User '$user' does not exist."
-  exit 1
-fi
+sudo -u "$1" whoami
