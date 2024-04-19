@@ -1,50 +1,40 @@
 #!/usr/bin/env bash
 # Fixes a web server to run Nginx as the nginx user listening on port 8080.
-
 # Check if Nginx is already installed
-if ! command -v nginx &> /dev/null; then
-  echo "Nginx is not installed. Please install Nginx before running this script."
-  exit 1
-fi
 
-# Stop Nginx if it's running
-if systemctl is-active nginx; then
-  systemctl stop nginx
-fi
 
-# Create a new user and group for Nginx
-useradd -r -s /bin/false -g nginx -u 100 nginx
+# Update the package list
+apt-get update -y
 
-# Copy the Nginx configuration file to the new location
-cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.original
-cat << EOF > /etc/nginx/nginx.conf
-user nginx;
-worker_processes auto;
+# Install nginx
+apt-get install nginx -y
 
-events {
-  worker_connections 1024;
-}
+# Create a new user called nginx
+adduser --system --no-create-home --shell /bin/false nginx
 
-http {
-  server {
-    listen 8080;
-    listen [::]:8080;
+# Change the owner of the nginx configuration file to the nginx user
+chown nginx:nginx /etc/nginx/nginx.conf
 
-    location / {
-      root /usr/share/nginx/html;
-      index index.html index.htm;
-    }
-  }
-}
-EOF
+# Change the owner of the nginx log files to the nginx user
+chown -R nginx:nginx /var/log/nginx
 
-# Reload Nginx configuration
-systemctl reload nginx
+# Change the owner of the nginx html files to the nginx user
+chown -R nginx:nginx /usr/share/nginx/html
 
-# Check if Nginx is running as the nginx user
-if ! ps aux | grep -v grep | grep -q nginx; then
-  echo "Nginx is not running as the nginx user. Please check the configuration."
-  exit 1
-fi
+# Change the user and group of the nginx process to the nginx user
+usermod -u 113 nginx
 
-echo "Nginx has been configured to run as the nginx user and listen on all active IPs on port 8080."
+# Change the group of the nginx process to the nginx group
+usermod -g 114 nginx
+
+# Restart nginx to apply the changes
+systemctl restart nginx
+
+# Set nginx to start on boot
+systemctl enable nginx
+
+# Change the listening port to 8080
+sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' /etc/nginx/nginx.conf
+
+# Restart nginx again to apply the port change
+systemctl restart nginx
